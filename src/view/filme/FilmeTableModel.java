@@ -62,9 +62,8 @@ public class FilmeTableModel extends AbstractTableModel {
         else
             return null;
     }
-
-    public void setPacientes(List<Filme> filmes)
-    {
+   
+    public void setFilme(List<Filme> filmes){
         this.filmes = filmes;
     }
 

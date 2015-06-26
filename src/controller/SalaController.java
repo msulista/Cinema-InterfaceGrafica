@@ -6,6 +6,7 @@
 package controller;
 
 import view.JanelaCrud;
+import view.sala.SalaPainelFormulario;
 
 /**
  *
@@ -32,7 +33,7 @@ public class SalaController {
     }
     
     public void inserirSala(){
-        
+        SalaPainelFormulario salaPainelFormulario = this.janela.
     }
     
     public void editarSala(){

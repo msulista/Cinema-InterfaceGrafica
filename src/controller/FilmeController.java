@@ -156,7 +156,7 @@ public class FilmeController {
         FilmeTableModel filmeTableModel = (FilmeTableModel) filmePainelTabela.getTabelaFilmes().getModel();
 
         FilmeDao filmeDao = new FilmeDaoBd();
-        filmeTableModel.setPacientes(filmeDao.listar());
+        filmeTableModel.setFilme(filmeDao.listar());
 
         filmePainelTabela.getTabelaFilmes().updateUI();
     }

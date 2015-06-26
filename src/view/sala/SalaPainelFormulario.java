@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 public class SalaPainelFormulario extends javax.swing.JPanel {
 
     private SalaController salaController;
+    private SalaPainelFormulario salaPainelFormulario;
     
     /**
      * Creates new form SalaPainelFormulario
@@ -107,6 +108,11 @@ public class SalaPainelFormulario extends javax.swing.JPanel {
     public JTextField getjTextFieldQtdCadeiras() {
         return jTextFieldQtdCadeiras;
     }
+
+    public SalaPainelFormulario getSalaPainelFormulario() {
+        return salaPainelFormulario;
+    }
+    
 
      public void zerarCampos(){
          this.jTextFieldNumero.setText("");
