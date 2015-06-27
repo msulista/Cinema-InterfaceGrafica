@@ -113,6 +113,32 @@ public class SalaController {
         this.atualizaTabela();
     }
     
+    public void salvarSala(String numero, String qtdCadeiras) {
+        
+        SalaPainelFormulario salaPainelFormulario = this.janela.getSalaPainelFormulario();
+        SalaPainelTabela salaPainelTabela = this.janela.getSalaPainelTabela();
+        SalaTabelaModel salaTabelaModel = (SalaTabelaModel) salaPainelTabela.getTableSala().getModel();
+        int qtdCad = Integer.parseInt(qtdCadeiras);
+        
+        if(telaAtual==FORMCADASTRO){
+            Sala sala = new Sala(numero, qtdCad);
+            SalaDao salaDao = new SalaDaoBd();
+            salaDao.inserir(sala);
+            PrintUtil.printMessageSucesso(janela,"Cadastro realizado com sucesso!");
+            salaPainelFormulario.zerarCampos();
+        }
+        else{
+            linhaSelecionada = salaPainelTabela.getTableSala().getSelectedRow();
+            String idSala = salaTabelaModel.getSala(linhaSelecionada).getNumero();
+            
+            Sala sala = new Sala(idSala, qtdCad);
+            SalaDao salaDao = new SalaDaoBd();
+            salaDao.atualizar(sala, idSala);
+            PrintUtil.printMessageSucesso(janela,"Edição realizada com sucesso!");
+
+        }
+
+    }
      public void voltarPrincipal() {
         telaAtual = TABELA;
         this.atualizaTabela();
