@@ -72,7 +72,27 @@ public class SalaController {
         this.janela.mostrarPainel(JanelaCrud.PAINELFORM);
     }
     public void visualizarSala(){
+        SalaPainelTabela salaPainelTabela = this.janela.getSalaPainelTabela();
+        SalaPainelFormulario salaPainelFormulario = this.janela.getSalaPainelFormulario();
+        SalaTabelaModel salaTabelaModel = (SalaTabelaModel) salaPainelTabela.getTableSala().getModel();
+
+        linhaSelecionada = salaPainelTabela.getTableSala().getSelectedRow();
+        if(linhaSelecionada < 0)
+        {
+            PrintUtil.printMessageError(janela, "Não há nenhum elemento selecionado na tabela");
+            return;
+        }
+         Sala sala = salaTabelaModel.getSala(linhaSelecionada);
+         
+        String qtdCadeiras = String.valueOf(sala.getQtdAssentos());
+        salaPainelFormulario.carregaDados(sala.getNumero(), qtdCadeiras);
         
+        salaPainelFormulario.getjButtonCadastra().setVisible(false);
+        salaPainelFormulario.getjButtonCadastra().setText("");
+        salaPainelFormulario.habilitaEdicaoFormSala(false);
+
+        telaAtual = FORMVISUALIZACAO;
+        this.janela.mostrarPainel(JanelaCrud.PAINELFORM);
     }
     public void removerSala(){
         
