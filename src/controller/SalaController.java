@@ -5,8 +5,12 @@
  */
 package controller;
 
+import model.Sala;
 import view.JanelaCrud;
+import view.PrintUtil;
 import view.sala.SalaPainelFormulario;
+import view.sala.SalaPainelTabela;
+import view.sala.SalaTabelaModel;
 
 /**
  *
@@ -33,11 +37,39 @@ public class SalaController {
     }
     
     public void inserirSala(){
-        SalaPainelFormulario salaPainelFormulario = this.janela.
+        SalaPainelFormulario salaPainelFormulario = this.janela.getSalaPainelFormulario();
+        salaPainelFormulario.zerarCampos();
+        
+        salaPainelFormulario.getjButtonCadastra().setVisible(true);
+        salaPainelFormulario.getjButtonCadastra().setText("Cadastrar");
+        salaPainelFormulario.habilitaEdicaoFormSala(true);
+        
+        telaAtual = FORMCADASTRO;
+        this.janela.mostrarPainel(JanelaCrud.PAINELFORM);
     }
     
     public void editarSala(){
+        SalaPainelTabela salaPainelTabela = this.janela.getSalaPainelTabela();
+        SalaPainelFormulario salaPainelFormulario = this.janela.getSalaPainelFormulario();
+        SalaTabelaModel salaTabelaModel = (SalaTabelaModel) salaPainelTabela.getTableSala().getModel();
+
+        linhaSelecionada = salaPainelTabela.getTableSala().getSelectedRow();
+        if(linhaSelecionada < 0)
+        {
+            PrintUtil.printMessageError(janela, "Não há nenhum elemento selecionado na tabela");
+            return;
+        }
+        Sala sala = salaTabelaModel.getSala(linhaSelecionada);
         
+        String qtdCadeiras = String.valueOf(sala.getQtdAssentos());
+        salaPainelFormulario.carregaDados(sala.getNumero(), qtdCadeiras);
+        
+        salaPainelFormulario.getjButtonCadastra().setVisible(true);
+        salaPainelFormulario.getjButtonCadastra().setText("Editar");
+        salaPainelFormulario.habilitaEdicaoFormSala(true);
+
+        telaAtual = FORMEDICAO;
+        this.janela.mostrarPainel(JanelaCrud.PAINELFORM);
     }
     public void visualizarSala(){
         

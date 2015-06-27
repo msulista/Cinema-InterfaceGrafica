@@ -6,6 +6,7 @@
 package cinema;
 
 import controller.FilmeController;
+import controller.SalaController;
 import view.JanelaCrud;
 
 /**
@@ -21,8 +22,11 @@ public class Cinema {
         // TODO code application logic here
         
         FilmeController filmeController = new FilmeController();
-        JanelaCrud janelaCrud = new JanelaCrud(filmeController);
+        SalaController salaController = new SalaController();
+        JanelaCrud janelaCrud = new JanelaCrud(filmeController, salaController);
+        
         filmeController.setJanela(janelaCrud);
+        salaController.setJanela(janelaCrud);
       
     }
     
