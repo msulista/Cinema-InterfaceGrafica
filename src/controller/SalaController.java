@@ -146,7 +146,13 @@ public class SalaController {
     }
      
     public void atualizaTabela(){
-        
+        SalaPainelTabela salaPainelTabela = this.janela.getSalaPainelTabela();
+        SalaTabelaModel salaTabelaModel = (SalaTabelaModel) salaPainelTabela.getTableSala().getModel();
+
+        SalaDao salaDao = new SalaDaoBd();
+        salaTabelaModel.setSala(salaDao.listar());
+
+        salaPainelTabela.getTableSala().updateUI();
     }
     
 }

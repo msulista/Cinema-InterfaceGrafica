@@ -36,6 +36,9 @@ public class SalaTabelaModel extends AbstractTableModel{
         this.salas = salas;
     }
 
+    public void setSala(List<Sala> salas){
+        this.salas = salas;
+    }
     public Sala getSala(int linha) {
         return (salas.get(linha));
     } 
