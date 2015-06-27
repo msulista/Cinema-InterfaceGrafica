@@ -5,6 +5,8 @@
  */
 package controller;
 
+import dao.SalaDao;
+import dao.SalaDaoBd;
 import model.Sala;
 import view.JanelaCrud;
 import view.PrintUtil;
@@ -95,7 +97,20 @@ public class SalaController {
         this.janela.mostrarPainel(JanelaCrud.PAINELFORM);
     }
     public void removerSala(){
-        
+        SalaPainelTabela salaPainelTabela = this.janela.getSalaPainelTabela();
+        SalaTabelaModel salaTabelaModel = (SalaTabelaModel) salaPainelTabela.getTableSala().getModel();
+        linhaSelecionada = salaPainelTabela.getTableSala().getSelectedRow();
+        if(linhaSelecionada < 0)
+        {
+            PrintUtil.printMessageError(janela,"Não há nenhum elemento selecionado na tabela");
+            return;
+        }
+        Sala sala = salaTabelaModel.getSala(linhaSelecionada);
+        SalaDao dao = new SalaDaoBd();
+        dao.deletar(sala);
+        PrintUtil.printMessageSucesso(janela,"Remoção realizada com sucesso!");
+
+        this.atualizaTabela();
     }
     
      public void voltarPrincipal() {
